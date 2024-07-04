@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Git-tify</title>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div>
+        <p class="p-24 font-space text-5xl font-bold">Git-tify <br>
+            <span class="text-2xl">
+                A website that lets you add your currently playing song on your GitHub profile.
+            </span>
+        </p>
+        <p class="font-space pl-24 text-3xl font-semibold">Choose your style</p> <br><br>
+        <div class="flex space-x-4 mb-8">
+            <!-- Vertical Template -->
+            <div id="spotify-card-vertical"
+                class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <img id="album-cover-vertical" src="" alt="Album cover" class="w-full h-64 object-cover">
+                <div class="p-4">
+                    <h2 id="song-name-vertical" class="text-lg font-semibold text-gray-800"></h2>
+                    <p id="artist-name-vertical" class="text-gray-600"></p>
+                </div>
+            </div>
+            <!-- Horizontal Template -->
+            <div id="spotify-card-horizontal"
+                class="max-w-2xl w-full bg-white shadow-lg rounded-lg overflow-hidden flex transform hover:scale-105 transition-transform duration-300">
+                <img id="album-cover-horizontal" src="" alt="Album cover" class="w-64 h-auto object-cover">
+                <div class="p-4">
+                    <h2 id="song-name-horizontal" class="text-lg font-semibold text-gray-800"></h2>
+                    <p id="artist-name-horizontal" class="text-gray-600"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+    <textarea id="profile-code" class="w-full h-48 p-4 border rounded-lg" readonly></textarea>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,5 +1,5 @@
-const clientId = 'c1d5ff6b35364db2816ab881c8a073a6';
-const clientSecret = 'ad260388c20549a0b43f4a063f27867f'; // Replace with your actual client secret
+const clientId = 'client-id-here';
+const clientSecret = 'client-secret'; // Replace with your actual client secret
 const redirectUri = 'http://localhost:5500/'; // Change this to your actual redirect URI
 const scopes = 'user-read-currently-playing user-read-playback-state';
 

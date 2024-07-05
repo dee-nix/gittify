@@ -86,12 +86,11 @@ async function fetchCurrentlyPlaying() {
 async function updateSpotifyCards() {
     const songData = await fetchCurrentlyPlaying();
     if (songData && songData.is_playing) {
-        // Update Vertical Card
         document.getElementById('album-cover-vertical').src = songData.item.album.images[0].url;
         document.getElementById('song-name-vertical').innerText = songData.item.name;
         document.getElementById('artist-name-vertical').innerText = songData.item.artists.map(artist => artist.name).join(', ');
 
-        // Update Horizontal Card
+
         document.getElementById('album-cover-horizontal').src = songData.item.album.images[0].url;
         document.getElementById('song-name-horizontal').innerText = songData.item.name;
         document.getElementById('artist-name-horizontal').innerText = songData.item.artists.map(artist => artist.name).join(', ');
@@ -105,9 +104,5 @@ async function updateSpotifyCards() {
         document.getElementById('profile-code').value = profileCode;
     }
 }
-
-// Initial call to update the cards
 updateSpotifyCards();
-
-// Set an interval to update the cards periodically (e.g., every 30 seconds)
 setInterval(updateSpotifyCards, 10000);

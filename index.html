@@ -11,14 +11,14 @@
     <title>Git-tify</title>
 </head>
 
-<body class="flex items-center justify-center min-h-screen">
+<body class="flex flex-col items-center justify-center max-h-screen">
     <div>
-        <p class="p-24 font-space text-5xl font-bold">Git-tify <br>
+        <p class="p-24 font-space text-5xl font-bold">Git-tify<br>
             <span class="text-2xl">
                 A website that lets you add your currently playing song on your GitHub profile.
             </span>
         </p>
-        <p class="font-space pl-24 text-3xl font-semibold">Choose your style</p> <br><br>
+        <p class="font-space pl-24 text-3xl font-semibold">Choose your style</p>
         <div class="flex space-x-4 mb-8">
             <!-- Vertical Template -->
             <div id="spotify-card-vertical"
@@ -39,10 +39,9 @@
                 </div>
             </div>
         </div>
+        <textarea id="profile-code" class="w-full h-48 p-4 border rounded-lg" readonly></textarea>
     </div>
-    <footer>
-    <textarea id="profile-code" class="w-full h-48 p-4 border rounded-lg" readonly></textarea>
-    </footer>
+    <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
 

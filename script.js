@@ -1,6 +1,6 @@
-const clientId = 'client-id-here';
-const clientSecret = 'client-secret'; // Replace with your actual client secret
-const redirectUri = 'http://localhost:5500/'; // Change this to your actual redirect URI
+const clientId = CONFIG.CLIENT_ID;
+const clientSecret = CONFIG.CLIENT_SECRET;
+const redirectUri = CONFIG.REDIRECT_URI;
 const scopes = 'user-read-currently-playing user-read-playback-state';
 
 // Function to get the authorization URL
@@ -20,7 +20,7 @@ async function getAccessToken(authorizationCode) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + btoa(clientId + ':' + 'your_client_secret') // Base64 encoded client_id:client_secret
+            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret) // Base64 encoded client_id:client_secret
         },
         body: new URLSearchParams({
             'grant_type': 'authorization_code',
@@ -41,7 +41,7 @@ async function refreshAccessToken() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + btoa(clientId + ':' + 'your_client_secret') // Base64 encoded client_id:client_secret
+            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret) // Base64 encoded client_id:client_secret
         },
         body: new URLSearchParams({
             'grant_type': 'refresh_token',
@@ -86,23 +86,22 @@ async function fetchCurrentlyPlaying() {
 async function updateSpotifyCards() {
     const songData = await fetchCurrentlyPlaying();
     if (songData && songData.is_playing) {
+        // Update Vertical Card
         document.getElementById('album-cover-vertical').src = songData.item.album.images[0].url;
         document.getElementById('song-name-vertical').innerText = songData.item.name;
         document.getElementById('artist-name-vertical').innerText = songData.item.artists.map(artist => artist.name).join(', ');
-
-
+        // Update Horizontal Card
         document.getElementById('album-cover-horizontal').src = songData.item.album.images[0].url;
         document.getElementById('song-name-horizontal').innerText = songData.item.name;
         document.getElementById('artist-name-horizontal').innerText = songData.item.artists.map(artist => artist.name).join(', ');
 
-        const profileCode = `
-        <div>
-            <img src="${songData.item.album.images[0].url}" alt="Album cover" style="width: 150px; height: 150px;">
-            <p><strong>Song:</strong> ${songData.item.name}</p>
-            <p><strong>Artist:</strong> ${songData.item.artists.map(artist => artist.name).join(', ')}</p>
-        </div>`;
-        document.getElementById('profile-code').value = profileCode;
+        // Generate profile code
+        const profileCode = `[![spotify-github-profile](https://spotify-github-profile.kittinanx.com/api/view?uid=YOUR_SPOTIFY_USER_ID&cover_image=true&theme=default&show_offline=false&background_color=121212&interchange=false)](https://github.com/kittinan/spotify-github-profile)`;
+        document.getElementById('profile-code').value = profileCode.replace("YOUR_SPOTIFY_USER_ID", songData.item.album.id);
     }
 }
+
+// Initial call to update the cards
 updateSpotifyCards();
-setInterval(updateSpotifyCards, 10000);
+// Set an interval to update the cards periodically (e.g., every 3 seconds)
+setInterval(updateSpotifyCards, 3000);
